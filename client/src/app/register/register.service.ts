@@ -10,7 +10,7 @@ export class RegisterService {
 
     constructor(private http: Http) {}
 
-    public register(user: User): Observable<IUser> {
+    public register(user: User): Observable<number> {
         const body: IUser = {
             username: user.username,
             name: user.name,
@@ -19,7 +19,7 @@ export class RegisterService {
         };
 
         return this.http.post('/api/register', body).map(
-            (res) => res.json()
+            res => res.json()
         );
     }
 }

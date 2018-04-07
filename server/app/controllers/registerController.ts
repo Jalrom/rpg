@@ -23,7 +23,13 @@ export class RegisterController implements RegistrableController {
                 newUser.name = req.body.name;
                 newUser.email = req.body.email;
                 newUser.password = req.body.password;
-                await this.registerService.createUser(newUser).then((user)=>console.log(user.id)).catch(err => next(err));
+                await this.registerService.createUser(newUser) 
+                    .then(user => {
+                        newUser.id = user.id
+                        res.json(newUser.id);
+                    })
+                    .catch(err => next(err));
+                    
             })
     }
 }

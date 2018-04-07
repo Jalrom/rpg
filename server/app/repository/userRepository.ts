@@ -28,6 +28,10 @@ export class UserRepository {
         return await this.userRepository.findOneById(id);
     }
 
+    public async findByUsername(username: string): Promise<User> {
+        return await this.userRepository.findOne({username: username});
+    }
+
     private connect(): Promise<Connection> {
         return createConnection({
             type: "postgres",

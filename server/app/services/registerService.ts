@@ -11,6 +11,11 @@ export class RegisterService {
     private userRepository: UserRepository;
 
     public async createUser(user: User): Promise<User> {
-        return await this.userRepository.create(user);
+        const res = await this.userRepository.findByUsername(user.username);
+        if ( res === undefined ) {
+            return await this.userRepository.create(user);
+        } else {
+            throw new Error('Username already taken.');
+        }        
     }
 }

@@ -1,4 +1,5 @@
-import { ROUTES } from './../routes';
+import { ServerError } from './../serverError.interface';
+import ROUTES from './../routes';
 import { AppService } from './../app.service';
 import { RegisterService } from './register.service';
 import { passwordMatcher } from './passwordMatcher';
@@ -61,7 +62,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.appService.loginPage = false;
-    localStorage['loggedIn'] = false;
     this.user = new User();
     this.passwordConfirm = '';
     this.temp();
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
   }
 
 private temp() {
-        this.user.username = 'Jeiji';
+    this.user.username = 'Jeiji';
     this.user.email = 'tes@h';
     this.user.name = 'Jean';
     this.user.password = 'Jean1234';
@@ -143,25 +143,20 @@ onValueChanged(data?: any) {
   }
 
 
-  public register(): void {
-    this.appService.loading = true;
-    this.registerService.register(this.user).subscribe(
-      res => {
-        console.log(res);
-        this.registerOk = true;
-        this.appService.loading = false;
-        // this.appService.id = res;
-        // localStorage['loggedIn'] = JSON.stringify(true);
-        // localStorage['id'] = JSON.stringify(res);
-        // res is the id of the user
-        this.router.navigate(['/' + ROUTES.GAME, res]);
-      },
-      err => {
-          console.log(err);
-        this.registerOk = false;
-        // this.formErrors.username = err.json();
-        this.appService.loading = false;
-      }
-    );
-  }
+    public register(): void {
+        this.appService.loading = true;
+        this.registerService.register(this.user).subscribe(
+            (res: number) => {
+                this.registerOk = true;
+                this.appService.loading = false;
+                this.router.navigate(['/' + ROUTES.GAME]);
+            },
+            (err) => {
+                const serverError: ServerError = err.json();
+                this.registerOk = false;
+                this.formErrors.username = serverError.message;
+                this.appService.loading = false;
+            }
+        );
+    }
 }
