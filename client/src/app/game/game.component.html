@@ -1,0 +1,9 @@
+<div #container id="container"
+(window:resize)="onWindowResize($event)"
+(mousemove)="onMouseMove($event)"
+(mousedown)="onMouseDown($event)"
+[ngStyle]="{'cursor': raycasterService.cursor == 'default' ? default : 'url(/assets/cursors/' + raycasterService.cursor + '), auto'}"
+>
+    <app-inventory></app-inventory>
+</div>
+

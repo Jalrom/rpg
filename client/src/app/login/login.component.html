@@ -1,0 +1,19 @@
+<div class="formContainer">
+  <form [formGroup]="loginForm">
+    <div class="field">
+        <input [matTooltip]=formErrors.username matTooltipPosition="right" class="control-form" placeholder="Username" type="text" id="username" formControlName="username" [(ngModel)]="user.username" [ngClass]="{'invalidField': formErrors.username}">
+    </div>
+    <div class="field">
+      <input [matTooltip]=formErrors.password matTooltipPosition="right" class="control-form" placeholder="Password" type="password" id="password" formControlName="password" [(ngModel)]="user.password" [ngClass]="{'invalidField': formErrors.password}">
+      <div *ngIf="!validUser" class="errorMsg centered">
+        {{formErrors.server}}
+      </div>
+    </div>
+    <div class="loginDiv">
+      <button [ngClass]="{'buttonInvalid': !loginForm.valid}" class="loginBtn" [disabled]="!loginForm.valid" (click)="login()">LOGIN</button>
+    </div>
+    <div class="registerDiv">
+      <button class="registerBtn" (click)="signup()">REGISTER</button>
+    </div>
+  </form>
+</div>

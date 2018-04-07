@@ -1,0 +1,41 @@
+<div class="formContainer">
+    <form [formGroup]="registerForm">
+        <div class="field">
+            <input [matTooltip]=formErrors.username matTooltipPosition="right"
+                class="control-form" placeholder="Username *" type="text" 
+                id="username" formControlName="username" [(ngModel)]="user.username" 
+                [ngClass]="{'invalidField': formErrors.username}">
+        </div>
+        <div class="field">
+            <input [matTooltip]=formErrors.name matTooltipPosition="right" 
+                class="control-form" placeholder="Name *" type="text"
+                id="name" formControlName="name" [(ngModel)]="user.name"
+                [ngClass]="{'invalidField': formErrors.name}">
+        </div>
+        <div class="field">
+            <input [matTooltip]=formErrors.email matTooltipPosition="right"
+                class="control-form" placeholder="Email *" type="email"
+                id="email" formControlName="email" [(ngModel)]="user.email"
+                [ngClass]="{'invalidField': formErrors.email}">
+        </div>
+        <div class="form-group" formGroupName="passwords">
+            <div class="field">
+                <input [matTooltip]="formErrors.passwords.password + (registerForm.get('passwords').touched && registerForm.get('passwords').hasError('noMatch') ? validationMessages.passwordConfirm.noMatch : '')" matTooltipPosition="right"
+                    class="control-form" placeholder="Password *" type="password"
+                    id="password" formControlName="password" [(ngModel)]="user.password"
+                    [ngClass]="{'invalidField': formErrors.passwords.password || (registerForm.get('passwords').touched && registerForm.get('passwords').hasError('noMatch'))}">
+            </div>
+            <div class="field">
+                <input [matTooltip]="formErrors.passwords.passwordConfirm + (registerForm.get('passwords').touched && registerForm.get('passwords').hasError('noMatch') ? validationMessages.passwordConfirm.noMatch : '')" matTooltipPosition="right"
+                    class="control-form" placeholder="Confirm Password *" type="password"
+                    id="passwordConfirm" formControlName="passwordConfirm"
+                    [ngClass]="{'invalidField': formErrors.passwords.passwordConfirm || (registerForm.get('passwords').touched && registerForm.get('passwords').hasError('noMatch'))}">
+            </div>
+        </div>
+        <div class="registerDiv">
+            <button class="registerBtn" [ngClass]="{'buttonInvalid': !registerForm.valid}"
+                [disabled]="!registerForm.valid" (click)="register()">REGISTER
+            </button>
+        </div>
+    </form>
+</div>

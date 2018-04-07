@@ -1,0 +1,18 @@
+<div *ngIf="!inventoryOpen" id="inventoryButton"
+    (mousedown)="openInventory($event)"
+>
+</div>
+<div *ngIf="inventoryOpen" id="inventory" (mousemove)="onMouseMove($event)">
+    <div id="closeInventory" (mousedown)="closeInventory($event)">
+        <!--TODO: Replace with icon-->
+        x
+    </div>
+    <div id="title">INVENTORY</div>
+    <div id="items">
+        <table>
+            <tr id="row" *ngFor="let row of slots">
+                <td id="item" *ngFor="let slot of row"> <app-slot [slot]="slot"></app-slot> </td>
+            </tr>
+        </table>
+    </div>
+</div>

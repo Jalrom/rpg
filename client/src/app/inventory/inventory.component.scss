@@ -1,0 +1,70 @@
+@import '~scss/variables';
+
+#inventoryButton {
+    position: absolute;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    top: 93%;
+    left: 96.5%;
+    transform: translate(-50%, -50%);
+    background: url('/assets/icons/chest.ico');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#inventory {
+    position: absolute;
+    opacity: 1.0;
+    width: 33%;
+    height: 90%;
+    top: 50%;
+    left: 81%;
+    transform: translate(-50%, -50%);
+    background-color: $gray-light;
+    border-radius: 3px;
+    border: 10px solid $gray-very-light;
+    box-shadow: 0 0 10px $shadow-color;
+}
+
+#closeInventory {
+    position: absolute;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: $font-color-light;
+    font-weight: bold;
+    top: 3%;
+    left: 4%;
+    border-radius: 2px;
+}
+
+#items {
+    position: absolute;
+    display: inline-block;
+    width: 90%;
+    top: 16%;
+    left:50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+#row {
+    margin: 4px;
+}
+
+table {
+    border-spacing: 4px;
+}
+
+#title {
+    position: absolute;
+    top: 10%;
+    left:50%;
+    color: $font-color-light;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    transform: translate(-50%, -50%);
+}
