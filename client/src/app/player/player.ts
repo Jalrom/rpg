@@ -1,7 +1,7 @@
-import { Inventory } from './inventory/inventory';
-import { Item } from './inventory/items/item';
+import { Inventory } from '../inventory/inventory';
+import { Item } from '../inventory/items/item';
 
-export const EXP_FACTOR = 3;
+export const EXP_FACTOR = 5;
 export class Player {
 
     // Static Instance

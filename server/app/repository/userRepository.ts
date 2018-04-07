@@ -32,6 +32,10 @@ export class UserRepository {
         return await this.userRepository.findOne({username: username});
     }
 
+    public async findByEmail(email: string): Promise<User> {
+        return await this.userRepository.findOne({email: email});
+    }
+
     private connect(): Promise<Connection> {
         return createConnection({
             type: "postgres",

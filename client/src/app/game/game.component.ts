@@ -1,7 +1,7 @@
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';
 import { Scene } from '../scene';
-import { Player } from '../player';
+import { Player } from '../player/player';
 import { Mineral } from 'app/minerals/mineral';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import * as THREE from 'three';

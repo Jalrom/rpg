@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="registerDiv">
-            <button class="registerBtn" [ngClass]="{'buttonInvalid': !registerForm.valid}"
+            <button class="registerBtn" [ngClass]="{'invalid': !registerForm.valid}"
                 [disabled]="!registerForm.valid" (click)="register()">REGISTER
             </button>
         </div>

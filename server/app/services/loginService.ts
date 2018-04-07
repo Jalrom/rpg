@@ -3,20 +3,25 @@ import { UserRepository } from './../repository/userRepository';
 import {injectable} from 'inversify';
 import 'reflect-metadata';
 import TYPES from "../types";
-import { User } from "../models/user";
 
 @injectable()
 export class LoginService {
     @inject(TYPES.UserRepository)
     private userRepository: UserRepository;
 
-    public async verifyLogin(user: User): Promise<boolean> {
-
-        // grab addresses from db
-        const addresses = await this.userRepository.find('1').then(() =>
-            {return true;}
-        );
-
-        return addresses;
+    public async login(user: any): Promise<boolean> {
+        const res = await this.userRepository.findByUsername(user.username);
+        console.log(res);
+        
+        if ( res !== undefined) {
+            if (res.password !== user.password) {
+                throw new Error('You entered the wrong password.');
+                
+            } else {                
+                return true;
+            }
+        } else {
+            throw new Error('Username ' + user.username + ' does not exist.');
+        }
     }
 }

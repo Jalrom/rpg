@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="loginDiv">
-      <button [ngClass]="{'buttonInvalid': !loginForm.valid}" class="loginBtn" [disabled]="!loginForm.valid" (click)="login()">LOGIN</button>
+      <button [ngClass]="{'invalid': !loginForm.valid}" class="loginBtn" [disabled]="!loginForm.valid" (click)="login()">LOGIN</button>
     </div>
     <div class="registerDiv">
       <button class="registerBtn" (click)="signup()">REGISTER</button>

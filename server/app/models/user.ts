@@ -5,11 +5,11 @@ import 'reflect-metadata';
 export class User {
     @PrimaryGeneratedColumn()
     public id: number;
-    @Column({length : 16})
+    @Column({length : 16, unique: true})
     public username: string;
     @Column({length : 32})
     public name: string;
-    @Column({length: 254})
+    @Column({length: 254, unique: true})
     public email: string;
     @Column()
     public password: string;

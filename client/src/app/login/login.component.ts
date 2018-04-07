@@ -1,3 +1,4 @@
+import { ServerError } from './../serverError.interface';
 import ROUTES from './../routes';
 import { Router } from '@angular/router';
 import { User } from './../user';
@@ -74,7 +75,12 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/' + ROUTES.GAME]);
       },
       (err) => {
-          console.log(err);
+          const serverError: ServerError = err.json();
+          if (serverError.message.includes('Username')) {
+            this.formErrors.username = serverError.message;
+          } else if (serverError.message.includes('password')) {
+            this.formErrors.password = serverError.message;
+          }
       }
     );
   }

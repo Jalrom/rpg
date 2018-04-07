@@ -74,10 +74,29 @@ input {
 
 input.invalidField {
     border: 2px solid $error-color;
+    background-color: $error-bg-color;
 }
 
 button {
     border: none;
     cursor: pointer;
+    outline: none;
     box-shadow: 0 0 5px $shadow-color;
+}
+
+button.invalid {
+    cursor: not-allowed;
+    background-color: $gray;
+}
+
+button.invalid:hover {
+    background-color: $gray;
+}
+
+::ng-deep .mat-tooltip {
+    text-align: justify;
+    border-radius: 10px;
+    border: 2px solid $error-color;
+    font-size: 14px;
+    color: $error-bg-color !important;
 }

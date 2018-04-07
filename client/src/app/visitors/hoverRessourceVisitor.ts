@@ -1,4 +1,4 @@
-import {Player} from '../player';
+import { Player } from '../player/player';
 import { RaycasterService } from '../raycaster.service';
 import { Visitor } from 'app/visitors/visitor';
 import { Mineral } from 'app/minerals/mineral';

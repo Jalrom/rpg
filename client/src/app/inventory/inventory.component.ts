@@ -1,7 +1,7 @@
 import { Slot } from './slot';
 import { Component, OnInit } from '@angular/core';
 import { Inventory } from 'app/inventory/inventory';
-import { Player } from 'app/player';
+import { Player } from '../player/player';
 
 @Component({
     selector: 'app-inventory',
