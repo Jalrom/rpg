@@ -4,9 +4,10 @@ import * as logger from "morgan";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import Types from "./types";
-import { injectable, inject } from "inversify";
-import { Routes } from "./routes";
+import TYPES from "./types";
+import { injectable } from "inversify";
+import { RegistrableController } from "./controllers/registerableController";
+import { container } from "./inversify.config";
 
 @injectable()
 export class Application {
@@ -14,7 +15,7 @@ export class Application {
     private readonly internalError: number = 500;
     public app: express.Application;
 
-    constructor(@inject(Types.Routes) private api: Routes) {
+    constructor() {
         this.app = express();
 
         this.config();
@@ -33,11 +34,14 @@ export class Application {
     }
 
     public routes(): void {
-        const router: express.Router = express.Router();
 
-        router.use(this.api.routes);
+        const controllers: RegistrableController[] = container.getAll<RegistrableController>(TYPES.Controller);
+        controllers.forEach(controller => controller.register(this.app));
+        // const router: express.Router = express.Router();
 
-        this.app.use(router);
+        // router.use(this.api.routes);
+
+        // this.app.use(router);
 
         this.errorHandeling();
     }

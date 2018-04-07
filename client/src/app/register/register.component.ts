@@ -37,10 +37,12 @@ export class RegisterComponent implements OnInit {
     },
     'email': {
       'required':      'Email required.',
+      'maxlength':     'Email can\'t exceed 254 characters.',
       'email':         'Invalid email.'
     },
     'password': {
       'required':      'Password required.',
+      'maxlength':     'Password can\'t exceed 64 characters.',
       'minlength':     'Password must contain at least 8 characters.',
       'pattern':       'Password must contain at least one lowercase character, one uppercase character and a special character.'
     },
@@ -80,7 +82,7 @@ buildForm(): void {
       username: [this.user.username, [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(15),
+          Validators.maxLength(16),
           Validators.pattern(/^[a-zA-Z0-9_.-]*$/)]],
       name: [this.user.name, [
           Validators.required,
@@ -88,11 +90,13 @@ buildForm(): void {
           Validators.pattern(/^[a-zA-Z0-9_.-]+(\s?[a-zA-Z0-9_.-]+)*$/)]],
       email: [this.user.email, [
           Validators.required,
+          Validators.maxLength(254),
           Validators.email]],
       passwords: this.fb.group({
         password: [this.user.password, [
             Validators.required,
             Validators.minLength(8),
+            Validators.maxLength(64),
             Validators.pattern(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]/)]],
         passwordConfirm: [this.passwordConfirm, [
             Validators.required
