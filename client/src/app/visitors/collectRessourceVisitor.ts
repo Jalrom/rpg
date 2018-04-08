@@ -21,9 +21,9 @@ export class CollectRessourceVisitor implements Visitor {
         if (mineral === null) {
             return null;
         }
-        if (mineral.levelRequired <= this._player.miningLevel) {
+        if (mineral.levelRequired <= this._player.stats.miningLevel) {
             // TODO: Experience instead of a level
-            this._player.miningExperience += mineral.experienceGained;
+            this._player.stats.miningExperience += mineral.experienceGained;
             this.deleteMineral(mineral);
             const item = this._player.inventory.items.get(mineral.name);
             if (item !== undefined) {

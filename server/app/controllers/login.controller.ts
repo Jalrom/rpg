@@ -1,8 +1,8 @@
 import { inject } from 'inversify';
-import { LoginService } from '../services/loginService';
+import { LoginService } from '../services/login.service';
 import * as express from 'express';
-import {injectable} from 'inversify';
-import {RegistrableController} from './RegisterableController';
+import { injectable } from 'inversify';
+import { RegistrableController } from './registerable.controller';
 import TYPES from '../types';
 
 @injectable()

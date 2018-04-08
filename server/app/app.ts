@@ -6,7 +6,7 @@ import * as bodyParser from "body-parser";
 import * as cors from "cors";
 import TYPES from "./types";
 import { injectable } from "inversify";
-import { RegistrableController } from "./controllers/registerableController";
+import { RegistrableController } from "./controllers/registerable.controller";
 import { container } from "./inversify.config";
 
 @injectable()
@@ -34,14 +34,8 @@ export class Application {
     }
 
     public routes(): void {
-
-        const controllers: RegistrableController[] = container.getAll<RegistrableController>(TYPES.Controller);
+        const controllers: RegistrableController[] = container.getAll<RegistrableController>(TYPES.Controller);        
         controllers.forEach(controller => controller.register(this.app));
-        // const router: express.Router = express.Router();
-
-        // router.use(this.api.routes);
-
-        // this.app.use(router);
 
         this.errorHandeling();
     }

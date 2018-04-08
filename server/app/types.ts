@@ -4,9 +4,13 @@ const TYPES = {
         Routes: Symbol("Routes"),
         Index: Symbol("Index"),
         Controller: Symbol('Controller'),
-        UserRepository: Symbol('UserRepository'),
+        // Repositories
+        PlayerRepository: Symbol('PlayerRepository'),
+        SkillsRepository: Symbol('SkillsRepository'),
+        // Services
         LoginService: Symbol('LoginService'),
-        RegisterService: Symbol('RegisterService')
+        RegisterService: Symbol('RegisterService'),
+        SkillsService: Symbol('SkillsService')
 };
 
 export default TYPES;

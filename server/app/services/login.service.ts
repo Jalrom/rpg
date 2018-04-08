@@ -1,27 +1,27 @@
 import { inject } from 'inversify';
-import { UserRepository } from './../repository/userRepository';
+import { PlayerRepository } from './../repository/player.repository';
 import {injectable} from 'inversify';
 import 'reflect-metadata';
 import TYPES from "../types";
 
 @injectable()
 export class LoginService {
-    @inject(TYPES.UserRepository)
-    private userRepository: UserRepository;
+    @inject(TYPES.PlayerRepository)
+    private playerRepository: PlayerRepository;
 
-    public async login(user: any): Promise<boolean> {
-        const res = await this.userRepository.findByUsername(user.username);
+    public async login(player: any): Promise<boolean> {
+        const res = await this.playerRepository.findByUsername(player.username);
         console.log(res);
         
         if ( res !== undefined) {
-            if (res.password !== user.password) {
+            if (res.password !== player.password) {
                 throw new Error('You entered the wrong password.');
                 
             } else {                
                 return true;
             }
         } else {
-            throw new Error('Username ' + user.username + ' does not exist.');
+            throw new Error('Username ' + player.username + ' does not exist.');
         }
     }
 }

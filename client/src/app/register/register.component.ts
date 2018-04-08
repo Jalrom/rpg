@@ -3,7 +3,7 @@ import ROUTES from './../routes';
 import { AppService } from './../app.service';
 import { RegisterService } from './register.service';
 import { passwordMatcher } from './passwordMatcher';
-import { User } from './../user';
+import { Player } from './../player';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -55,35 +55,35 @@ export class RegisterComponent implements OnInit {
     };
 
     private registerForm: FormGroup;
-    private user: User;
+    private player: Player;
     private passwordConfirm: string;
     constructor(private fb: FormBuilder, private router: Router, private registerService: RegisterService,
                 private appService: AppService) { }
 
     public ngOnInit(): void {
         this.appService.loginPage = false;
-        this.user = new User();
+        this.player = new Player();
         this.passwordConfirm = '';
         this.buildForm();
     }
 
     private buildForm(): void {
         this.registerForm = this.fb.group({
-            username: [this.user.username, [
+            username: [this.player.username, [
                 Validators.required,
                 Validators.minLength(2),
                 Validators.maxLength(16),
                 Validators.pattern(/^[a-zA-Z0-9_.-]*$/)]],
-            name: [this.user.name, [
+            name: [this.player.name, [
                 Validators.required,
                 Validators.maxLength(32),
                 Validators.pattern(/^[a-zA-Z0-9_.-]+(\s?[a-zA-Z0-9_.-]+)*$/)]],
-            email: [this.user.email, [
+            email: [this.player.email, [
                 Validators.required,
                 Validators.maxLength(254),
                 Validators.email]],
             passwords: this.fb.group({
-                password: [this.user.password, [
+                password: [this.player.password, [
                     Validators.required,
                     Validators.minLength(8),
                     Validators.maxLength(64),
@@ -135,7 +135,7 @@ export class RegisterComponent implements OnInit {
 
     public register(): void {
         this.appService.loading = true;
-        this.registerService.register(this.user).subscribe(
+        this.registerService.register(this.player).subscribe(
             (res: number) => {
                 this.appService.loading = false;
                 this.router.navigate(['/' + ROUTES.GAME]);

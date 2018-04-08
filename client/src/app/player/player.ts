@@ -1,31 +1,23 @@
+import { Stats } from './../player-stats/stats';
 import { Inventory } from '../inventory/inventory';
 import { Item } from '../inventory/items/item';
 
-export const EXP_FACTOR = 5;
 export class Player {
-
     // Static Instance
     private static _instance: Player;
 
     // Properties
     private _username: string;
-    private _level: number;
-    private _miningLevel: number;
-    private _miningExperience: number;
+    private _stats: Stats;
     private _inventory: Inventory;
 
     // Constructor
     private constructor() {
         this.username = 'test';
-        this.level = 1;
-        this.miningLevel = 1;
-        this.miningExperience = 0;
+        this.stats = new Stats();
         this.inventory = new Inventory();
     }
-    // Methods
-    private convertSkillExperienceToLevel(experience: number): number {
-        return Math.sqrt(experience) / EXP_FACTOR + 1;
-    }
+
     // Getters and Setters
     public static get instance(): Player {
         // Do you need arguments? Make it a regular method instead.
@@ -40,22 +32,6 @@ export class Player {
         this._username = value;
     }
 
-    public get level(): number {
-        return this._level;
-    }
-
-    public set level(value: number) {
-        this._level = value;
-    }
-
-    public get miningLevel(): number {
-        return this._miningLevel;
-    }
-
-    public set miningLevel(value: number) {
-        this._miningLevel = value;
-    }
-
     public get inventory(): Inventory {
         return this._inventory;
     }
@@ -64,13 +40,12 @@ export class Player {
         this._inventory = value;
     }
 
-    public get miningExperience(): number {
-        return this._miningExperience;
+    public get stats(): Stats {
+        return this._stats;
     }
 
-    public set miningExperience(value: number) {
-        this.miningLevel = this.convertSkillExperienceToLevel(value);
-        console.log(this.miningLevel);
-        this._miningExperience = value;
+    public set stats(value: Stats) {
+        this._stats = value;
     }
+
 }

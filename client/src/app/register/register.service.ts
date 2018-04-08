@@ -1,5 +1,5 @@
-import { IUser } from './../user.interface';
-import { User } from './../user';
+import { IPlayer } from './../player.interface';
+import { Player } from 'app/player';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -10,12 +10,13 @@ export class RegisterService {
 
     constructor(private http: Http) {}
 
-    public register(user: User): Observable<number> {
-        const body: IUser = {
-            username: user.username,
-            name: user.name,
-            email: user.email,
-            password: user.password
+    public register(player: Player): Observable<number> {
+        const body: IPlayer = {
+            username: player.username,
+            name: player.name,
+            email: player.email,
+            password: player.password,
+            skills: []
         };
 
         return this.http.post('/api/register', body).map(

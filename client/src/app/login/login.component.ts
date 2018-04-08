@@ -1,7 +1,7 @@
 import { ServerError } from './../serverError.interface';
 import ROUTES from './../routes';
 import { Router } from '@angular/router';
-import { User } from './../user';
+import { Player } from './../player';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
@@ -30,19 +30,19 @@ export class LoginComponent implements OnInit {
   };
 
   private loginForm: FormGroup;
-  private user: User;
+  private player: Player;
   constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) { }
 
   ngOnInit() {
-    this.user = new User();
+    this.player = new Player();
     this.buildForm();
   }
 
   buildForm(): void {
     this.loginForm = this.fb.group({
-      username: [this.user.username, [
+      username: [this.player.username, [
           Validators.required]],
-      password: [this.user.password, [
+      password: [this.player.password, [
             Validators.required]]
     });
     this.loginForm.valueChanges
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     // this.appService.loading = true;
-    this.loginService.login(this.user).subscribe(
+    this.loginService.login(this.player).subscribe(
       (res) => {
           console.log(res);
           // res contains the id of the user

@@ -1,11 +1,10 @@
-export class User {
+export class Player {
 
     // Properties
     private _username: string;
     private _password: string;
     private _email: string;
     private _name: string;
-    private _profile: string;
 
     // Constructor
     public constructor() {
@@ -13,7 +12,6 @@ export class User {
         this._password = '';
         this._email = '';
         this._name = '';
-        this._profile = '';
     }
 
     // Getters and Setters
@@ -47,13 +45,5 @@ export class User {
 
     public set email(value: string) {
         this._email = value;
-    }
-
-    public get profile(): string {
-        return this._profile;
-    }
-
-    public set profile(value: string) {
-        this._profile = value;
     }
 }

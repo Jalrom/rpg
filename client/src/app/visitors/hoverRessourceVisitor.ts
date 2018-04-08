@@ -21,7 +21,7 @@ export class HoverRessourceVisitor implements Visitor {
         const intersection = this.raycasterService.render();
         if (intersection.length > 0 && (intersection[0].object as THREE.Mesh).geometry.name === 'mineral') {
             if (intersection[0].object.name === mineral.mesh.name) {
-                if (mineral.levelRequired <= Player.instance.miningLevel) {
+                if (mineral.levelRequired <= Player.instance.stats.miningLevel) {
                     mineral.material.color = new THREE.Color(0x0000ff);
                     this.raycasterService.cursor = POINTER;
                 } else {

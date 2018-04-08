@@ -18,6 +18,7 @@ import { SlotComponent } from './inventory/slot/slot.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GameComponent } from './game/game.component';
+import { PlayerStatsComponent } from './player-stats/player-stats.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GameComponent } from './game/game.component';
     SlotComponent,
     LoginComponent,
     RegisterComponent,
-    GameComponent
+    GameComponent,
+    PlayerStatsComponent
   ],
   imports: [
     BrowserModule,
