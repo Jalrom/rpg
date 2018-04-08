@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { AppService } from './app.service';
 import { RegisterService } from './register/register.service';
 import { RaycasterService } from 'app/raycaster.service';
+import { PlayerGlobal } from 'app/player.global';
 
 import { AppComponent } from './app.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -18,7 +19,8 @@ import { SlotComponent } from './inventory/slot/slot.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GameComponent } from './game/game.component';
-import { PlayerStatsComponent } from './player-stats/player-stats.component';
+import { StatsComponent } from './stats/stats.component';
+import { StatsService } from './stats/stats.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { PlayerStatsComponent } from './player-stats/player-stats.component';
     LoginComponent,
     RegisterComponent,
     GameComponent,
-    PlayerStatsComponent
+    StatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { PlayerStatsComponent } from './player-stats/player-stats.component';
     BrowserAnimationsModule,
     MatTooltipModule
   ],
-  providers: [RaycasterService, RegisterService, LoginService, AppService],
+  providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, StatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

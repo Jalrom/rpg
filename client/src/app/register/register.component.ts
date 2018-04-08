@@ -1,9 +1,10 @@
+import { StatsService } from 'app/stats/stats.service';
 import { ServerError } from './../serverError.interface';
 import ROUTES from './../routes';
 import { AppService } from './../app.service';
 import { RegisterService } from './register.service';
 import { passwordMatcher } from './passwordMatcher';
-import { Player } from './../player';
+import { PlayerGlobal } from './../player.global';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -55,14 +56,12 @@ export class RegisterComponent implements OnInit {
     };
 
     private registerForm: FormGroup;
-    private player: Player;
     private passwordConfirm: string;
     constructor(private fb: FormBuilder, private router: Router, private registerService: RegisterService,
-                private appService: AppService) { }
+                private appService: AppService, private player: PlayerGlobal, private statsService: StatsService) { }
 
     public ngOnInit(): void {
         this.appService.loginPage = false;
-        this.player = new Player();
         this.passwordConfirm = '';
         this.buildForm();
     }
@@ -136,9 +135,11 @@ export class RegisterComponent implements OnInit {
     public register(): void {
         this.appService.loading = true;
         this.registerService.register(this.player).subscribe(
-            (res: number) => {
+            (id: number) => {
                 this.appService.loading = false;
-                this.router.navigate(['/' + ROUTES.GAME]);
+                this.statsService.createSkill(id).subscribe(() => {
+                    this.router.navigate(['/' + ROUTES.LOGIN]);
+                });
             },
             (err) => {
                 const serverError: ServerError = err.json();

@@ -1,5 +1,5 @@
 import { IPlayer } from './../player.interface';
-import { Player } from 'app/player';
+import { PlayerGlobal } from 'app/player.global';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,7 @@ export class RegisterService {
 
     constructor(private http: Http) {}
 
-    public register(player: Player): Observable<number> {
+    public register(player: PlayerGlobal): Observable<number> {
         const body: IPlayer = {
             username: player.username,
             name: player.name,

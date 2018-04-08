@@ -1,7 +1,7 @@
 import { ServerError } from './../serverError.interface';
 import ROUTES from './../routes';
 import { Router } from '@angular/router';
-import { Player } from './../player';
+import { PlayerGlobal } from './../player.global';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
@@ -30,11 +30,10 @@ export class LoginComponent implements OnInit {
   };
 
   private loginForm: FormGroup;
-  private player: Player;
-  constructor(private fb: FormBuilder, private router: Router, private loginService: LoginService) { }
+  constructor(private fb: FormBuilder, private router: Router,
+                private loginService: LoginService, private player: PlayerGlobal) { }
 
   ngOnInit() {
-    this.player = new Player();
     this.buildForm();
   }
 
@@ -70,7 +69,8 @@ export class LoginComponent implements OnInit {
     // this.appService.loading = true;
     this.loginService.login(this.player).subscribe(
       (res) => {
-          console.log(res);
+          this.player.skills = res.skills;
+          this.player.id = res.id;
           // res contains the id of the user
           this.router.navigate(['/' + ROUTES.GAME]);
       },
