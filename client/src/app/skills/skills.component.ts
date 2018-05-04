@@ -15,10 +15,10 @@ export class SkillsComponent implements OnInit {
 
     public ngOnInit(): void {
         this.skillsService.getSkills(this.player.id).subscribe((res) => {
-            this.player.skills = res;
-            this.miningSkill = res.filter((skill) => {return skill.name === 'mining'; })[0];
-            console.log(this.miningSkill);
-            
+            for (let i = 0; i < res.length; i++) {
+                this.player.skills.push(Object.assign(new Skill(), res[i]));
+            }
+            this.miningSkill = this.player.skills.filter((skill) => {return skill.name === 'mining'; })[0];
         });
     }
 

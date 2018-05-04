@@ -7,6 +7,15 @@ export class Skill {
     private _experience: number;
     private _nextLevelExperience: number;
 
+    // Constructor
+    // public constructor(id: number, name: string, level: number, experience: number, nextLevelExperience: number) {
+    //     this._id = id;
+    //     this._name = name;
+    //     this._level = level;
+    //     this._experience = experience;
+    //     this._nextLevelExperience = nextLevelExperience;
+    // }
+
     // Methods
     public convertExpToLevel(experience: number) {
         return Math.floor(Math.sqrt(experience) / 5 + 1);
