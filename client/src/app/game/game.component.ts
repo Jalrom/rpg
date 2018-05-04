@@ -1,7 +1,7 @@
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';
 import { Scene } from '../scene';
-import { Player } from '../player/player';
+import { PlayerGlobal } from '../player.global';
 import { Mineral } from 'app/minerals/mineral';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import * as THREE from 'three';
@@ -31,13 +31,12 @@ export class GameComponent implements OnInit {
     private scene: THREE.Scene;
     private renderer: THREE.WebGLRenderer;
 
-    private player: Player;
     private minerals: Mineral[];
     private minedMineral: Mineral;
     private mineralIdCounter: number;
     private mineralIndex: number;
 
-    public constructor(private raycasterService: RaycasterService) {
+    public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal) {
         this.scene = Scene.Instance.scene;
         this.camera = Camera.Instance.camera;
         this.renderer = Renderer.Instance.renderer;
@@ -61,8 +60,8 @@ export class GameComponent implements OnInit {
         this.renderer.render(this.scene, this.camera);
         this.minedMineral = null;
         for (let i = 0; i < this.minerals.length; i++) {
-            this.minerals[i].material.color = this.minerals[i].color;
-            const hoverRessourceVisitor = new HoverRessourceVisitor(this.raycasterService, this.minerals);
+            this.minerals[i].modelObject.material.color = this.minerals[i].modelObject.color;
+            const hoverRessourceVisitor = new HoverRessourceVisitor(this.player, this.raycasterService, this.minerals);
             if (hoverRessourceVisitor.visit(this.minerals[i])) {
                 this.mineralIndex = i;
                 this.minedMineral = this.minerals[i];
@@ -84,7 +83,7 @@ export class GameComponent implements OnInit {
     }
 
     public onMouseDown(event: MouseEvent) {
-        const collectRessourceVisitor = new CollectRessourceVisitor(this.minerals, this.mineralIndex, this.scene);
+        const collectRessourceVisitor = new CollectRessourceVisitor(this.player, this.minerals, this.mineralIndex, this.scene);
         collectRessourceVisitor.visit(this.minedMineral);
     }
 
@@ -102,22 +101,22 @@ export class GameComponent implements OnInit {
         setInterval(() => {
             if (this.minerals.length < 100) {
                 const bronze = new Bronze();
-                bronze.mesh.name = String(this.mineralIdCounter++);
+                bronze.modelObject.mesh.name = String(this.mineralIdCounter++);
                 let x = Math.random() * 10 - 5;
                 let y = Math.random() * 3.5;
                 let z = - 1;
-                bronze.mesh.position.set(x, y, z);
+                bronze.modelObject.mesh.position.set(x, y, z);
                 this.minerals.push(bronze);
-                this.scene.add(bronze.mesh);
+                this.scene.add(bronze.modelObject.mesh);
 
                 const iron = new Iron();
-                iron.mesh.name = String(this.mineralIdCounter++);
+                iron.modelObject.mesh.name = String(this.mineralIdCounter++);
                 x = Math.random() * 10 - 5;
                 y = Math.random() * 3.5;
                 z = - 1;
-                iron.mesh.position.set(x, y, z);
+                iron.modelObject.mesh.position.set(x, y, z);
                 this.minerals.push(iron);
-                this.scene.add(iron.mesh);
+                this.scene.add(iron.modelObject.mesh);
             }
         }, 500);
     }

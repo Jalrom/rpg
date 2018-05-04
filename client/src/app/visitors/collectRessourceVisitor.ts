@@ -1,4 +1,5 @@
-import { Player } from '../player/player';
+import { Skill } from './../skill';
+import { PlayerGlobal } from '../player.global';
 import { Mineral } from 'app/minerals/mineral';
 import { Visitor } from './visitor';
 
@@ -7,31 +8,31 @@ export class CollectRessourceVisitor implements Visitor {
     private _minerals: Mineral[];
     private _mineralIndex: number;
     private _scene: THREE.Scene;
-    private _player: Player;
 
     // Constructor
-    public constructor(minerals: Mineral[], mineralIndex: number, scene: THREE.Scene) {
+    public constructor(private player: PlayerGlobal, minerals: Mineral[], mineralIndex: number, scene: THREE.Scene) {
         this._minerals = minerals;
         this._mineralIndex = mineralIndex;
         this._scene = scene;
-        this._player = Player.instance;
     }
 
     public visit(mineral: Mineral): Object {
         if (mineral === null) {
             return null;
         }
-        if (mineral.levelRequired <= this._player.stats.miningLevel) {
-            // TODO: Experience instead of a level
-            this._player.stats.miningExperience += mineral.experienceGained;
+
+        const miningSkill: Skill = this.player.skills.filter((skill) => { return skill.name === 'mining'; })[0];
+        if (mineral.levelRequired <= miningSkill.level) {
+            miningSkill.experience = mineral.experienceGained + miningSkill.experience;
+            miningSkill.setExp(100);
             this.deleteMineral(mineral);
-            const item = this._player.inventory.items.get(mineral.name);
+            const item = this.player.inventory.items.get(mineral.name);
             if (item !== undefined) {
                 const quantity = item[0] + mineral.dropCount;
                 const index = item[1];
-                this._player.inventory.addItem(mineral, quantity, index);
+                this.player.inventory.addItem(mineral, quantity, index);
             } else {
-                this._player.inventory.addItem(mineral, mineral.dropCount, null);
+                this.player.inventory.addItem(mineral, mineral.dropCount, null);
             }
         } else {
             // TODO: indicate level too low visualy
@@ -43,8 +44,8 @@ export class CollectRessourceVisitor implements Visitor {
     // TODO: exploit polymorphism
     private deleteMineral(mineral: Mineral): void {
         this._minerals.splice(this._mineralIndex, 1);
-        this._scene.remove(mineral.mesh);
-        mineral.geometry.dispose();
-        mineral.material.dispose();
+        this._scene.remove(mineral.modelObject.mesh);
+        mineral.modelObject.geometry.dispose();
+        mineral.modelObject.material.dispose();
     }
 }

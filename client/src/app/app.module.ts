@@ -19,8 +19,8 @@ import { SlotComponent } from './inventory/slot/slot.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GameComponent } from './game/game.component';
-import { StatsComponent } from './stats/stats.component';
-import { StatsService } from './stats/stats.service';
+import { SkillsComponent } from './skills/skills.component';
+import { SkillsService } from './skills/skills.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { StatsService } from './stats/stats.service';
     LoginComponent,
     RegisterComponent,
     GameComponent,
-    StatsComponent,
+    SkillsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,7 @@ import { StatsService } from './stats/stats.service';
     BrowserAnimationsModule,
     MatTooltipModule
   ],
-  providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, StatsService],
+  providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, SkillsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

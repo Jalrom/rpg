@@ -1,5 +1,5 @@
+import { Skill } from './skill';
 import { Injectable } from '@angular/core';
-import { ISkill } from './skill.interface';
 import { Inventory } from 'app/inventory/inventory';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class PlayerGlobal {
     private _email: string;
     private _name: string;
     private _inventory: Inventory;
-    private _skills: ISkill[];
+    private _skills: Skill[];
 
     // Constructor
     public constructor() {
@@ -72,11 +72,11 @@ export class PlayerGlobal {
         this._inventory = value;
     }
 
-    public get skills(): ISkill[] {
+    public get skills(): Skill[] {
         return this._skills;
     }
 
-    public set skills(value: ISkill[]) {
+    public set skills(value: Skill[]) {
         this._skills = value;
     }
 }

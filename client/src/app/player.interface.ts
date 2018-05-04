@@ -1,4 +1,4 @@
-import { ISkill } from './skill.interface';
+import { Skill } from './skill';
 
 export interface IPlayer {
     id?: number;
@@ -6,5 +6,5 @@ export interface IPlayer {
     name: string;
     email: string;
     password: string;
-    skills: ISkill[];
+    skills: Skill[];
 }

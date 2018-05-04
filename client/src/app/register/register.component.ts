@@ -1,4 +1,4 @@
-import { StatsService } from 'app/stats/stats.service';
+import { SkillsService } from 'app/skills/skills.service';
 import { ServerError } from './../serverError.interface';
 import ROUTES from './../routes';
 import { AppService } from './../app.service';
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     private registerForm: FormGroup;
     private passwordConfirm: string;
     constructor(private fb: FormBuilder, private router: Router, private registerService: RegisterService,
-                private appService: AppService, private player: PlayerGlobal, private statsService: StatsService) { }
+                private appService: AppService, private player: PlayerGlobal, private skillsService: SkillsService) { }
 
     public ngOnInit(): void {
         this.appService.loginPage = false;
@@ -137,7 +137,7 @@ export class RegisterComponent implements OnInit {
         this.registerService.register(this.player).subscribe(
             (id: number) => {
                 this.appService.loading = false;
-                this.statsService.createSkill(id).subscribe(() => {
+                this.skillsService.createSkill(id).subscribe(() => {
                     this.router.navigate(['/' + ROUTES.LOGIN]);
                 });
             },

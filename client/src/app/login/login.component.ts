@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+    this.player.username = 'Peter';
+    this.player.password = 'Jean1234';
   }
 
   buildForm(): void {
@@ -69,7 +71,6 @@ export class LoginComponent implements OnInit {
     // this.appService.loading = true;
     this.loginService.login(this.player).subscribe(
       (res) => {
-          this.player.skills = res.skills;
           this.player.id = res.id;
           // res contains the id of the user
           this.router.navigate(['/' + ROUTES.GAME]);

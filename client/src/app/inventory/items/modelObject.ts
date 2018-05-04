@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export abstract class GameObject extends THREE.Object3D {
+export class ModelObject extends THREE.Object3D {
     private _color: THREE.Color;
     private _geometry: THREE.Geometry;
     private _material: THREE.MeshPhongMaterial;

@@ -1,6 +1,9 @@
-export interface ISkill {
-    id: number;
-    name: string;
-    level: number;
-    experience: number;
-}
+// export interface ISkill {
+//     _id: number;
+//     _name: string;
+//     _level: number;
+//     _experience: number;
+
+//     experience(value: number);
+//     setExp(value: number);
+// }

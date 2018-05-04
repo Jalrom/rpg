@@ -1,7 +1,7 @@
+import { PlayerGlobal } from './../player.global';
 import { Slot } from './slot';
 import { Component, OnInit } from '@angular/core';
 import { Inventory } from 'app/inventory/inventory';
-import { Player } from '../player/player';
 
 @Component({
     selector: 'app-inventory',
@@ -13,9 +13,9 @@ export class InventoryComponent implements OnInit {
     private inventory: Inventory;
     private slots: Slot[][];
 
-    public constructor() {
+    public constructor(private player: PlayerGlobal) {
         this.inventoryOpen = false;
-        this.inventory = Player.instance.inventory;
+        this.inventory = this.player.inventory;
         this.slots = this.inventory.slots;
     }
 

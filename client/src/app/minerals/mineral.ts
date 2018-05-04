@@ -14,7 +14,7 @@ export abstract class Mineral extends Item {
         this.levelRequired = 0;
         this.experienceGained = 0;
         this.dropCount = 0;
-        this.geometry.name = 'mineral';
+        this.modelObject.geometry.name = 'mineral';
     }
 
     // Methods
