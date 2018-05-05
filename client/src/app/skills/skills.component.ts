@@ -11,19 +11,14 @@ import { SkillsService } from 'app/skills/skills.service';
 export class SkillsComponent implements OnInit {
     private miningSkill: Skill;
 
-    constructor(private player: PlayerGlobal, private skillsService: SkillsService) {}
+    public constructor(private player: PlayerGlobal, private skillsService: SkillsService) {}
 
     public ngOnInit(): void {
-        this.skillsService.getSkills(this.player.id).subscribe((res) => {
+        this.skillsService.getSkills().subscribe((res) => {
             for (let i = 0; i < res.length; i++) {
                 this.player.skills.push(Object.assign(new Skill(), res[i]));
             }
             this.miningSkill = this.player.skills.filter((skill) => {return skill.name === 'mining'; })[0];
         });
     }
-
-    public nextlvlexp(level: number): number {
-        return Math.pow((level) * 5, 2);
-    }
-
 }

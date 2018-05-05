@@ -1,3 +1,4 @@
+import { SkillsService } from './../skills/skills.service';
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';
 import { Scene } from '../scene';
@@ -36,7 +37,7 @@ export class GameComponent implements OnInit {
     private mineralIdCounter: number;
     private mineralIndex: number;
 
-    public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal) {
+    public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal, private skillsService: SkillsService) {
         this.scene = Scene.Instance.scene;
         this.camera = Camera.Instance.camera;
         this.renderer = Renderer.Instance.renderer;
@@ -83,7 +84,7 @@ export class GameComponent implements OnInit {
     }
 
     public onMouseDown(event: MouseEvent) {
-        const collectRessourceVisitor = new CollectRessourceVisitor(this.player, this.minerals, this.mineralIndex, this.scene);
+        const collectRessourceVisitor = new CollectRessourceVisitor(this.player, this.skillsService, this.minerals, this.mineralIndex, this.scene);
         collectRessourceVisitor.visit(this.minedMineral);
     }
 

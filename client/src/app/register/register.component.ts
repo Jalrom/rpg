@@ -137,7 +137,7 @@ export class RegisterComponent implements OnInit {
         this.registerService.register(this.player).subscribe(
             (id: number) => {
                 this.appService.loading = false;
-                this.skillsService.createSkill(id).subscribe(() => {
+                this.skillsService.createSkill().subscribe(() => {
                     this.router.navigate(['/' + ROUTES.LOGIN]);
                 });
             },

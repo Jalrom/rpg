@@ -1,3 +1,5 @@
+import { ISkill } from './../skill.interface';
+import { SkillsService } from 'app/skills/skills.service';
 import { Skill } from './../skill';
 import { PlayerGlobal } from '../player.global';
 import { Mineral } from 'app/minerals/mineral';
@@ -10,7 +12,8 @@ export class CollectRessourceVisitor implements Visitor {
     private _scene: THREE.Scene;
 
     // Constructor
-    public constructor(private player: PlayerGlobal, minerals: Mineral[], mineralIndex: number, scene: THREE.Scene) {
+    public constructor(private player: PlayerGlobal, private skillsService: SkillsService,
+                        minerals: Mineral[], mineralIndex: number, scene: THREE.Scene) {
         this._minerals = minerals;
         this._mineralIndex = mineralIndex;
         this._scene = scene;
@@ -21,9 +24,10 @@ export class CollectRessourceVisitor implements Visitor {
             return null;
         }
 
-        const miningSkill: Skill = this.player.skills.filter((skill) => { return skill.name === 'mining'; })[0];
+        const miningSkill: ISkill = this.player.skills.filter((skill) => { return skill.name === 'mining'; })[0];
         if (mineral.levelRequired <= miningSkill.level) {
             miningSkill.experience = mineral.experienceGained + miningSkill.experience;
+            this.skillsService.updateSkill(miningSkill);
             this.deleteMineral(mineral);
             const item = this.player.inventory.items.get(mineral.name);
             if (item !== undefined) {
