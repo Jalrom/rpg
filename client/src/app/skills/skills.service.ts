@@ -18,6 +18,13 @@ export class SkillsService {
     }
 
     public updateSkill(skill: ISkill): Observable<any> {
-        return this.http.put('/api/skills/' + skill.id, skill);
+        const updatedSkill = {
+            id: skill.id,
+            name: skill.name,
+            experience: skill.experience,
+            level: skill.level,
+            player: this.player
+        };
+        return this.http.put('/api/skills/', updatedSkill);
     }
 }

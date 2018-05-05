@@ -27,7 +27,7 @@ export class CollectRessourceVisitor implements Visitor {
         const miningSkill: ISkill = this.player.skills.filter((skill) => { return skill.name === 'mining'; })[0];
         if (mineral.levelRequired <= miningSkill.level) {
             miningSkill.experience = mineral.experienceGained + miningSkill.experience;
-            this.skillsService.updateSkill(miningSkill);
+            this.skillsService.updateSkill(miningSkill).subscribe();
             this.deleteMineral(mineral);
             const item = this.player.inventory.items.get(mineral.name);
             if (item !== undefined) {
