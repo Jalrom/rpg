@@ -1,4 +1,4 @@
-import { JSONLoaderService } from './../jsonLoader.service';
+import { ObjectLoaderService, MOUNTAIN_MODEL } from './../jsonLoader.service';
 import { SkillsService } from './../skills/skills.service';
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';
@@ -39,7 +39,7 @@ export class GameComponent implements OnInit {
     private mineralIndex: number;
 
     public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal, private skillsService: SkillsService,
-                        private jsonLoaderService: JSONLoaderService) {
+                        private jsonLoaderService: ObjectLoaderService) {
         this.scene = Scene.Instance.scene;
         this.camera = Camera.Instance.camera;
         this.renderer = Renderer.Instance.renderer;
@@ -47,15 +47,15 @@ export class GameComponent implements OnInit {
         this.mineralIdCounter = 0;
     }
 
-    public async ngOnInit() {
+    public async ngOnInit(): Promise<void> {
         this.renderer.setSize(
             (this.elementRef.nativeElement as HTMLDivElement).clientWidth,
             (this.elementRef.nativeElement as HTMLDivElement).clientHeight,
             true);
         document.getElementById('container').appendChild(this.renderer.domElement);
-        this.createFloor();
-        this.createMinerals();
         await this.jsonLoaderService.loadModels();
+        this.loadTerrain();
+        this.createMinerals();
         this.render();
     }
 
@@ -87,17 +87,23 @@ export class GameComponent implements OnInit {
     }
 
     public onMouseDown(event: MouseEvent) {
-        const collectRessourceVisitor = new CollectRessourceVisitor(this.player, this.skillsService, this.minerals, this.mineralIndex, this.scene);
+        const collectRessourceVisitor = new CollectRessourceVisitor(
+            this.player, this.skillsService, this.minerals,
+            this.mineralIndex, this.scene);
         collectRessourceVisitor.visit(this.minedMineral);
     }
 
-    private createFloor() {
-        const geometry = new THREE.PlaneGeometry(10, 10, 1, 1);
-        const material = new THREE.MeshPhongMaterial({color: 0xbb4e1a, transparent: true, opacity: 0.5});
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.name = 'floor';
-        mesh.rotateX(-Math.PI / 2);
-        this.scene.add(mesh);
+    private async loadTerrain() {
+
+        const terrain = await this.jsonLoaderService.getModel(MOUNTAIN_MODEL);
+        terrain.scale.set(10, 10, 10);
+        this.scene.add(terrain);
+        // const geometry = new THREE.PlaneGeometry(10, 10, 1, 1);
+        // const material = new THREE.MeshPhongMaterial({color: 0xbb4e1a, transparent: true, opacity: 0.5});
+        // const mesh = new THREE.Mesh(geometry, material);
+        // mesh.name = 'floor';
+        // mesh.rotateX(-Math.PI / 2);
+        // this.scene.add(mesh);
     }
 
     // TODO: Factory
@@ -121,7 +127,6 @@ export class GameComponent implements OnInit {
                 iron.mesh.position.set(x, y, z);
                 this.minerals.push(iron);
                 this.scene.add(iron.mesh);
-                console.log(bronze);
             }
         }, 500);
     }

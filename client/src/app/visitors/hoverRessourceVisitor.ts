@@ -30,7 +30,6 @@ export class HoverRessourceVisitor implements Visitor {
                 }
                 return true;
             } else {
-                console.log(mineral.color);
                 (mineral.mesh.material as THREE.MeshPhongMaterial).color = mineral.color;
             }
         } else {

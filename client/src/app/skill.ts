@@ -62,7 +62,6 @@ export class Skill {
     public set experience(value: number) {
         this._experience = value;
         this.level = this.convertExpToLevel(this.experience);
-        console.log('salut');
     }
 
     public set nextLevelExperience(value: number) {

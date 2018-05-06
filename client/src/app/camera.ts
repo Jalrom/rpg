@@ -10,8 +10,8 @@ export class Camera {
     // Constructor
     private constructor() {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.z = 3;
         this.camera.position.y = 1;
+        this.camera.position.z = 10;
     }
 
     // Getter and Setters

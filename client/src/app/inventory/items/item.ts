@@ -1,4 +1,4 @@
-import { JSONLoaderService } from './../../jsonLoader.service';
+import { ObjectLoaderService } from './../../jsonLoader.service';
 import * as THREE from 'three';
 
 export abstract class Item {

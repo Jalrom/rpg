@@ -1,9 +1,9 @@
-import { JSONLoaderService } from './../jsonLoader.service';
+import { ObjectLoaderService } from './../jsonLoader.service';
 import { Mineral } from 'app/minerals/mineral';
 import * as THREE from 'three';
 
 export class Gold extends Mineral {
-    public constructor(protected jsonLoaderService: JSONLoaderService) {
+    public constructor(protected jsonLoaderService: ObjectLoaderService) {
         super(jsonLoaderService);
         this.name = 'gold';
         this.mesh.name = 'gold';

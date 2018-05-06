@@ -13,6 +13,7 @@ export class Scene {
     // Constructor
     private constructor() {
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x77ccff);
         this.ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         this.pointLight = new THREE.PointLight(0xffffff, 2.0);
         this.pointLight.position.z = 0;

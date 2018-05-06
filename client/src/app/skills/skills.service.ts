@@ -17,6 +17,7 @@ export class SkillsService {
         return this.http.post('/api/skills', {playerId: this.player.id});
     }
 
+    // TODO: Only send relevant information (player and name will not change)
     public updateSkill(skill: ISkill): Observable<any> {
         const updatedSkill = {
             id: skill.id,

@@ -1,4 +1,4 @@
-import { JSONLoaderService, MINERAL_MODEL } from './../jsonLoader.service';
+import { ObjectLoaderService, MINERAL_MODEL } from './../jsonLoader.service';
 import { Item } from '../inventory/items/item';
 import { Visitor } from './../visitors/visitor';
 import * as THREE from 'three';
@@ -10,7 +10,7 @@ export abstract class Mineral extends Item {
     private _dropCount: number;
 
     // Constructor
-    public constructor(protected jsonLoaderService: JSONLoaderService) {
+    public constructor(protected jsonLoaderService: ObjectLoaderService) {
         super();
         this.levelRequired = 0;
         this.experienceGained = 0;
