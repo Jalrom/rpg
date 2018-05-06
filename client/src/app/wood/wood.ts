@@ -13,7 +13,7 @@ export abstract class Wood extends Item {
         this.levelRequired = 0;
         this.experienceGained = 0;
         this.dropCount = 0;
-        this.modelObject.geometry.name = 'wood';
+        this.mesh.geometry.name = 'wood';
     }
 
     // Methods

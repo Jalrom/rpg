@@ -1,3 +1,4 @@
+import { JSONLoaderService } from './../jsonLoader.service';
 import { SkillsService } from './../skills/skills.service';
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';
@@ -37,7 +38,8 @@ export class GameComponent implements OnInit {
     private mineralIdCounter: number;
     private mineralIndex: number;
 
-    public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal, private skillsService: SkillsService) {
+    public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal, private skillsService: SkillsService,
+                        private jsonLoaderService: JSONLoaderService) {
         this.scene = Scene.Instance.scene;
         this.camera = Camera.Instance.camera;
         this.renderer = Renderer.Instance.renderer;
@@ -45,7 +47,7 @@ export class GameComponent implements OnInit {
         this.mineralIdCounter = 0;
     }
 
-    public ngOnInit(): void {
+    public async ngOnInit() {
         this.renderer.setSize(
             (this.elementRef.nativeElement as HTMLDivElement).clientWidth,
             (this.elementRef.nativeElement as HTMLDivElement).clientHeight,
@@ -53,6 +55,7 @@ export class GameComponent implements OnInit {
         document.getElementById('container').appendChild(this.renderer.domElement);
         this.createFloor();
         this.createMinerals();
+        await this.jsonLoaderService.loadModels();
         this.render();
     }
 
@@ -61,7 +64,7 @@ export class GameComponent implements OnInit {
         this.renderer.render(this.scene, this.camera);
         this.minedMineral = null;
         for (let i = 0; i < this.minerals.length; i++) {
-            this.minerals[i].modelObject.material.color = this.minerals[i].modelObject.color;
+            (this.minerals[i].mesh.material as THREE.MeshPhongMaterial).color = this.minerals[i].color;
             const hoverRessourceVisitor = new HoverRessourceVisitor(this.player, this.raycasterService, this.minerals);
             if (hoverRessourceVisitor.visit(this.minerals[i])) {
                 this.mineralIndex = i;
@@ -100,24 +103,25 @@ export class GameComponent implements OnInit {
     // TODO: Factory
     private createMinerals() {
         setInterval(() => {
-            if (this.minerals.length < 100) {
-                const bronze = new Bronze();
-                bronze.modelObject.mesh.name = String(this.mineralIdCounter++);
+            if (this.minerals.length < 2) {
+                const bronze = new Bronze(this.jsonLoaderService);
+                bronze.mesh.name = String(this.mineralIdCounter++);
                 let x = Math.random() * 10 - 5;
                 let y = Math.random() * 3.5;
                 let z = - 1;
-                bronze.modelObject.mesh.position.set(x, y, z);
+                bronze.mesh.position.set(x, y, z);
                 this.minerals.push(bronze);
-                this.scene.add(bronze.modelObject.mesh);
+                this.scene.add(bronze.mesh);
 
-                const iron = new Iron();
-                iron.modelObject.mesh.name = String(this.mineralIdCounter++);
+                const iron = new Iron(this.jsonLoaderService);
+                iron.mesh.name = String(this.mineralIdCounter++);
                 x = Math.random() * 10 - 5;
                 y = Math.random() * 3.5;
                 z = - 1;
-                iron.modelObject.mesh.position.set(x, y, z);
+                iron.mesh.position.set(x, y, z);
                 this.minerals.push(iron);
-                this.scene.add(iron.modelObject.mesh);
+                this.scene.add(iron.mesh);
+                console.log(bronze);
             }
         }, 500);
     }

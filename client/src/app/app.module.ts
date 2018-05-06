@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 import { RegisterService } from './register/register.service';
 import { RaycasterService } from 'app/raycaster.service';
 import { PlayerGlobal } from 'app/player.global';
+import { JSONLoaderService } from './jsonLoader.service';
 
 import { AppComponent } from './app.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -42,7 +43,8 @@ import { SkillsService } from './skills/skills.service';
     BrowserAnimationsModule,
     MatTooltipModule
   ],
-  providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, SkillsService],
+  providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, SkillsService,
+  JSONLoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

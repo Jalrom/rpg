@@ -69,7 +69,4 @@ export class Skill {
         this._nextLevelExperience = value;
     }
 
-    public setExp(value: number) {
-        console.log('setexp');
-    }
 }

@@ -3,7 +3,7 @@ import { Item } from './items/item';
 export class Slot {
     // Properties
     private _filled: boolean;
-    private _item: Item;
+    private _item: number;
     private _quantity: number;
 
     // Constructor
@@ -30,11 +30,11 @@ export class Slot {
         this._filled = value;
     }
 
-    public get item(): Item {
+    public get item(): number {
         return this._item;
     }
 
-    public set item(value: Item) {
+    public set item(value: number) {
         this._item = value;
     }
 }

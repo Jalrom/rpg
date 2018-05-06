@@ -1,4 +1,5 @@
-import {Item} from '../inventory/items/item';
+import { JSONLoaderService, MINERAL_MODEL } from './../jsonLoader.service';
+import { Item } from '../inventory/items/item';
 import { Visitor } from './../visitors/visitor';
 import * as THREE from 'three';
 
@@ -9,12 +10,13 @@ export abstract class Mineral extends Item {
     private _dropCount: number;
 
     // Constructor
-    public constructor() {
+    public constructor(protected jsonLoaderService: JSONLoaderService) {
         super();
         this.levelRequired = 0;
         this.experienceGained = 0;
         this.dropCount = 0;
-        this.modelObject.geometry.name = 'mineral';
+        this.mesh = this.jsonLoaderService.getModel(MINERAL_MODEL);
+        this.mesh.geometry.name = 'mineral';
     }
 
     // Methods

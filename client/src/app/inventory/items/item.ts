@@ -1,12 +1,14 @@
-import {ModelObject} from './modelObject';
+import { JSONLoaderService } from './../../jsonLoader.service';
+import * as THREE from 'three';
 
 export abstract class Item {
     // Properties
     private _identifier: number;
     private _name: string;
     private _value: number;
+    private _color: THREE.Color;
     private _description: string;
-    private _modelObject: ModelObject;
+    private _mesh: THREE.Mesh;
 
     // Constructor
     constructor() {
@@ -14,7 +16,6 @@ export abstract class Item {
         this.name = '';
         this.value = 0;
         this.description = 'No description';
-        this._modelObject = new ModelObject();
     }
 
     // Getters and Setters
@@ -30,12 +31,16 @@ export abstract class Item {
         return this._value;
     }
 
+    public get color(): THREE.Color {
+        return this._color;
+    }
+
     public get description(): string {
         return this._description;
     }
 
-    public get modelObject(): ModelObject {
-        return this._modelObject;
+    public get mesh(): THREE.Mesh {
+        return this._mesh;
     }
 
     public set identifier(value: number) {
@@ -50,11 +55,15 @@ export abstract class Item {
         this._value = value;
     }
 
+    public set color(value: THREE.Color) {
+        this._color = value;
+    }
+
     public set description(value: string) {
         this._description = value;
     }
 
-    public set modelObject(value: ModelObject) {
-        this._modelObject = value;
+    public set mesh(value: THREE.Mesh) {
+        this._mesh = value;
     }
 }

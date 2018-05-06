@@ -37,7 +37,7 @@ export class Inventory {
         } else {
             i = Math.floor(this.firstEmptyIdx / NUM_COLUMNS);
             j = this.firstEmptyIdx % NUM_ROWS;
-            this.slots[i][j].item = item;
+            this.slots[i][j].item = item.identifier;
             this.slots[i][j].quantity += quantity;
             this.slots[i][j].filled = true;
             this.items.set(item.name, [quantity, this.firstEmptyIdx]);

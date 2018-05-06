@@ -1,12 +1,15 @@
+import { JSONLoaderService } from './../jsonLoader.service';
 import { Mineral } from 'app/minerals/mineral';
 import * as THREE from 'three';
 
 export class Gold extends Mineral {
-    public constructor() {
-        super();
+    public constructor(protected jsonLoaderService: JSONLoaderService) {
+        super(jsonLoaderService);
         this.name = 'gold';
-        this.modelObject.color = new THREE.Color(0xFFD700);
-        this.modelObject.material.color = this.modelObject.color;
+        this.mesh.name = 'gold';
+        this.color = new THREE.Color(0xFFD700);
+        (this.mesh as any).material = (this.mesh as any).material.clone(true);
+        (this.mesh.material as THREE.MeshPhongMaterial).color = this.color;
         this.experienceGained = 30;
         this.levelRequired = 20;
         this.dropCount = Math.ceil(Math.random() * 3 + 1);

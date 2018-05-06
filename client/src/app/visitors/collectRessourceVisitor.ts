@@ -47,8 +47,8 @@ export class CollectRessourceVisitor implements Visitor {
     // TODO: exploit polymorphism
     private deleteMineral(mineral: Mineral): void {
         this._minerals.splice(this._mineralIndex, 1);
-        this._scene.remove(mineral.modelObject.mesh);
-        mineral.modelObject.geometry.dispose();
-        mineral.modelObject.material.dispose();
+        this._scene.remove(mineral.mesh);
+        mineral.mesh.geometry.dispose();
+        (mineral.mesh.material as THREE.MeshPhongMaterial).dispose();
     }
 }
