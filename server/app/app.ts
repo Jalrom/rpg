@@ -1,4 +1,4 @@
-import { RegistrableHub } from './hubs/registerable.hub';
+import "reflect-metadata";
 import * as express from "express";
 import * as path from "path";
 import * as logger from "morgan";
@@ -20,7 +20,6 @@ export class Application {
         this.app = express();
         this.config();
         this.routes();
-        this.hubs();
         this.errorHandeling();
     }
 
@@ -37,12 +36,6 @@ export class Application {
     private routes(): void {
         const controllers: RegistrableController[] = container.getAll<RegistrableController>(TYPES.Controller);        
         controllers.forEach(controller => controller.register(this.app));
-    }
-
-    private hubs(): void {
-        const hubs: RegistrableHub[] = container.getAll<RegistrableHub>(TYPES.Hub);
-        console.log('hubs length', hubs.length);
-        hubs.forEach(hub => hub.register());
     }
 
     private errorHandeling(): void {

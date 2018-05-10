@@ -1,5 +1,4 @@
-import { ResourceHub } from './hubs/resource.hub';
-import { SkillsController } from './controllers/skills.controller';
+// import { ResourceHub } from './hubs/resource.hub';
 import { Container } from "inversify";
 import { Server } from "./server";
 import { Application } from "./app";
@@ -15,6 +14,7 @@ import { SkillsRepository } from './repository/skills.repository';
 import { RegistrableController } from "./controllers/registerable.controller";
 import { LoginController } from "./controllers/login.controller";
 import { RegisterController } from "./controllers/register.controller";
+import { SkillsController } from './controllers/skills.controller';
 
 const container: Container = new Container();
 
@@ -36,6 +36,6 @@ container.bind<PlayerRepository>(TYPES.PlayerRepository).to(PlayerRepository);
 container.bind<SkillsRepository>(TYPES.SkillsRepository).to(SkillsRepository);
 
 // Hubs
-container.bind<ResourceHub>(TYPES.Hub).to(ResourceHub);
+// container.bind<ResourceHub>(TYPES.Hub).to(ResourceHub);
 
 export { container };

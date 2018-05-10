@@ -12,6 +12,7 @@ import { RaycasterService } from 'app/raycaster.service';
 import { CollectRessourceVisitor } from '../visitors/collectRessourceVisitor';
 import { HoverRessourceVisitor } from 'app/visitors/hoverRessourceVisitor';
 import { Renderer } from 'app/renderer';
+import * as socketIo from 'socket.io-client';
 
 export const CANVAS_DIMENSIONS = {
   width: null,
@@ -20,7 +21,7 @@ export const CANVAS_DIMENSIONS = {
 
 const NEAR = 1;
 const FAR = 1000;
-
+const SERVER_URL = 'http://localhost:3000';
 @Component({
     selector: 'app-game',
     templateUrl: './game.component.html',
@@ -38,6 +39,7 @@ export class GameComponent implements OnInit {
     private mineralIdCounter: number;
     private mineralIndex: number;
 
+    private socket;
     public constructor(private raycasterService: RaycasterService, private player: PlayerGlobal, private skillsService: SkillsService,
                         private jsonLoaderService: ObjectLoaderService) {
         this.scene = Scene.Instance.scene;
@@ -45,6 +47,7 @@ export class GameComponent implements OnInit {
         this.renderer = Renderer.Instance.renderer;
         this.minerals = [];
         this.mineralIdCounter = 0;
+        this.socket = socketIo(SERVER_URL);
     }
 
     public async ngOnInit(): Promise<void> {
