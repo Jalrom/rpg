@@ -1,4 +1,3 @@
-import { LoginService } from './login/login.service';
 import { MatTooltipModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppService } from './app.service';
+import { LoginService } from './login/login.service';
 import { RegisterService } from './register/register.service';
 import { RaycasterService } from 'app/raycaster.service';
 import { PlayerGlobal } from 'app/player.global';
 import { ObjectLoaderService } from './jsonLoader.service';
+import { SkillsService } from './skills/skills.service';
 
 import { AppComponent } from './app.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -21,8 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GameComponent } from './game/game.component';
 import { SkillsComponent } from './skills/skills.component';
-import { SkillsService } from './skills/skills.service';
 
+import { ResourceHub } from './resource.hub';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { SkillsService } from './skills/skills.service';
     MatTooltipModule
   ],
   providers: [RaycasterService, RegisterService, LoginService, AppService, PlayerGlobal, SkillsService,
-  ObjectLoaderService],
+    ObjectLoaderService, ResourceHub],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
