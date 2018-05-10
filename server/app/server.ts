@@ -1,3 +1,4 @@
+import { ResourceHub } from './hubs/resource.hub';
 import { Application } from "./app";
 import * as http from "http";
 import TYPES from "./types";
@@ -12,14 +13,11 @@ export class Server {
     private readonly baseDix: number = 10;
     private server: http.Server;
     private io: SocketIO.Server;
-
     constructor(@inject(TYPES.Application) private application: Application) { 
         
     }
 
-    public init(): void {
-        console.log('init server');
-        
+    public init(): void {        
         this.application.app.set("port", this.appPort);
 
         this.server = http.createServer(this.application.app);
@@ -28,9 +26,15 @@ export class Server {
         this.server.on("error", (error: NodeJS.ErrnoException) => this.onError(error));
         this.server.on("listening", () => this.onListening());
 
+        // TODO:
+        // Each Hub should have its own listener files 
+        // Use of namespace is also helpful
         this.io = socketIo(this.server);
-        this.io.on('connect', () => {console.log('connected socket');
-        })
+        new ResourceHub(this.io);
+        // let resHub = this.io.of('/resource');
+        // resHub.on('connect', (socket: SocketIO.Socket) => {
+        //     new ResourceHub(resHub, socket);
+        // })
     }
 
     private normalizePort(val: number | string): number | string | boolean {
