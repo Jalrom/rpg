@@ -36,7 +36,7 @@ export class PlayerRepository {
         return await this.playerRepository.findOne({email: email});
     }
 
-    private connect(): Promise<Connection> {
+    private connect(): Promise<Connection> {        
         return createConnection({
             type: "postgres",
             host: "localhost",

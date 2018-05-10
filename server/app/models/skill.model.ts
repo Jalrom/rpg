@@ -2,8 +2,16 @@ import { Player } from './player.model';
 import { Column, Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
 import 'reflect-metadata';
 
-@Entity()
-export class Skill {
+export interface SkillDTO {
+    id?: number;
+    name: string;
+    level: number;
+    experience: number;
+    player: Player;
+}
+
+@Entity("skill")
+export class SkillSchema implements SkillDTO{
     @PrimaryGeneratedColumn()
     public id: number;
     

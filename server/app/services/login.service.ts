@@ -9,16 +9,15 @@ export class LoginService {
     @inject(TYPES.PlayerRepository)
     private playerRepository: PlayerRepository;
 
-    public async login(player: any): Promise<boolean> {
+    public async login(player: any): Promise<any> {
         const res = await this.playerRepository.findByUsername(player.username);
-        console.log(res);
         
         if ( res !== undefined) {
             if (res.password !== player.password) {
                 throw new Error('You entered the wrong password.');
                 
             } else {                
-                return true;
+                return res;
             }
         } else {
             throw new Error('Username ' + player.username + ' does not exist.');

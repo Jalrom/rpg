@@ -21,7 +21,7 @@ export class LoginController implements RegistrableController {
                     username: req.body.username,
                     password: req.body.password
                 }                
-                await this.loginService.login(login).then(resp => res.json(true)).catch(err => next(err));
+                await this.loginService.login(login).then(resp => res.json(resp)).catch(err => next(err));
             })
     }
 }

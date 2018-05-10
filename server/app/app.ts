@@ -1,3 +1,4 @@
+import { RegistrableHub } from './hubs/registerable.hub';
 import * as express from "express";
 import * as path from "path";
 import * as logger from "morgan";
@@ -17,10 +18,10 @@ export class Application {
 
     constructor() {
         this.app = express();
-
         this.config();
-
         this.routes();
+        this.hubs();
+        this.errorHandeling();
     }
 
     private config(): void {
@@ -33,11 +34,15 @@ export class Application {
         this.app.use(cors());
     }
 
-    public routes(): void {
+    private routes(): void {
         const controllers: RegistrableController[] = container.getAll<RegistrableController>(TYPES.Controller);        
         controllers.forEach(controller => controller.register(this.app));
+    }
 
-        this.errorHandeling();
+    private hubs(): void {
+        const hubs: RegistrableHub[] = container.getAll<RegistrableHub>(TYPES.Hub);
+        console.log('hubs length', hubs.length);
+        hubs.forEach(hub => hub.register());
     }
 
     private errorHandeling(): void {

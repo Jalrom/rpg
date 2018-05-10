@@ -1,3 +1,4 @@
+import { ResourceHub } from './hubs/resource.hub';
 import { SkillsController } from './controllers/skills.controller';
 import { Container } from "inversify";
 import { Server } from "./server";
@@ -33,4 +34,8 @@ container.bind<SkillsService>(TYPES.SkillsService).to(SkillsService);
 // Repositories
 container.bind<PlayerRepository>(TYPES.PlayerRepository).to(PlayerRepository);
 container.bind<SkillsRepository>(TYPES.SkillsRepository).to(SkillsRepository);
+
+// Hubs
+container.bind<ResourceHub>(TYPES.Hub).to(ResourceHub);
+
 export { container };

@@ -1,8 +1,8 @@
 const TYPES = {
-        Server: Symbol("Server"),
-        Application: Symbol("Application"),
-        Routes: Symbol("Routes"),
-        Index: Symbol("Index"),
+        Server: Symbol('Server'),
+        Application: Symbol('Application'),
+        Routes: Symbol('Routes'),
+        Index: Symbol('Index'),
         Controller: Symbol('Controller'),
         // Repositories
         PlayerRepository: Symbol('PlayerRepository'),
@@ -10,7 +10,10 @@ const TYPES = {
         // Services
         LoginService: Symbol('LoginService'),
         RegisterService: Symbol('RegisterService'),
-        SkillsService: Symbol('SkillsService')
+        SkillsService: Symbol('SkillsService'),
+        // Hubs
+        Hub: Symbol('Hub'),
+        ResourceHub: Symbol('ResourceHub')
 };
 
 export default TYPES;
