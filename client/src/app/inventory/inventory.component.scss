@@ -33,11 +33,13 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    color: $font-color-light;
-    font-weight: bold;
     top: 3%;
     left: 4%;
     border-radius: 2px;
+    background: url('/assets/icons/close.svg');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #items {
@@ -56,6 +58,9 @@
 
 table {
     border-spacing: 4px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #title {

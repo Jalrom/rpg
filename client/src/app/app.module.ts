@@ -12,7 +12,7 @@ import { LoginService } from './login/login.service';
 import { RegisterService } from './register/register.service';
 import { RaycasterService } from 'app/raycaster.service';
 import { PlayerGlobal } from 'app/player.global';
-import { ObjectLoaderService } from './jsonLoader.service';
+import { ObjectLoaderService } from './objectLoader.service';
 import { SkillsService } from './skills/skills.service';
 
 import { AppComponent } from './app.component';

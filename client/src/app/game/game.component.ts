@@ -1,5 +1,5 @@
 import { ResourceHub } from './../resource.hub';
-import { ObjectLoaderService, MOUNTAIN_MODEL } from './../jsonLoader.service';
+import { ObjectLoaderService, MOUNTAIN_MODEL } from './../objectLoader.service';
 import { SkillsService } from './../skills/skills.service';
 import { Iron } from '../minerals/iron';
 import { Bronze } from '../minerals/bronze';

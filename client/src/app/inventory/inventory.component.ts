@@ -9,12 +9,12 @@ import { Inventory } from 'app/inventory/inventory';
     styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
-    private inventoryOpen: boolean;
+    private isOpenInventory: boolean;
     private inventory: Inventory;
     private slots: Slot[][];
 
     public constructor(private player: PlayerGlobal) {
-        this.inventoryOpen = false;
+        this.isOpenInventory = false;
         this.inventory = this.player.inventory;
         this.slots = this.inventory.slots;
     }
@@ -23,11 +23,11 @@ export class InventoryComponent implements OnInit {
     }
 
     public openInventory(event: MouseEvent): void {
-        this.inventoryOpen = true;
+        this.isOpenInventory = true;
     }
 
     public closeInventory(event: MouseEvent) {
-        this.inventoryOpen = false;
+        this.isOpenInventory = false;
     }
 
     public onMouseMove(event: MouseEvent) {

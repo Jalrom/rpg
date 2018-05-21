@@ -21,7 +21,7 @@ export class SkillsRepository {
         return await this.skillsRepository.save(skill);
     }
 
-    public async update(skill: SkillDTO): Promise<SkillDTO> {
+    public async update(skill: Object): Promise<Object> {
         return await this.skillsRepository.save(skill);
     }
 

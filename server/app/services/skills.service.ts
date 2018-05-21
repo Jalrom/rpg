@@ -24,9 +24,9 @@ export class SkillsService {
         await this.skillRepository.create(skillDTO);
     }
 
-    public async updateSkill(skill: Skill): Promise<void> {        
-        const skillDTO = this.toSkillDTO(skill);
-        await this.skillRepository.update(skillDTO);
+    public async updateSkill(skill: Object): Promise<void> {        
+        // const skillDTO = this.toSkillDTO(skill);
+        await this.skillRepository.update(skill);
     }
 
     private toSkillDTO(skill: Skill): SkillDTO {

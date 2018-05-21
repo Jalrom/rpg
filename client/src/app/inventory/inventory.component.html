@@ -1,11 +1,9 @@
-<div *ngIf="!inventoryOpen" id="inventoryButton"
+<div *ngIf="!isOpenInventory" id="inventoryButton"
     (mousedown)="openInventory($event)"
 >
 </div>
-<div *ngIf="inventoryOpen" id="inventory" (mousemove)="onMouseMove($event)">
+<div *ngIf="isOpenInventory" id="inventory" (mousemove)="onMouseMove($event)">
     <div id="closeInventory" (mousedown)="closeInventory($event)">
-        <!--TODO: Replace with icon-->
-        x
     </div>
     <div id="title">INVENTORY</div>
     <div id="items">

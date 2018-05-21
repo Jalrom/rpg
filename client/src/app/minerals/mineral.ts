@@ -1,4 +1,4 @@
-import { ObjectLoaderService, MINERAL_MODEL } from './../jsonLoader.service';
+import { ObjectLoaderService, MINERAL_MODEL } from './../objectLoader.service';
 import { Item } from '../inventory/items/item';
 import { Visitor } from './../visitors/visitor';
 import * as THREE from 'three';
@@ -17,6 +17,7 @@ export abstract class Mineral extends Item {
         this.dropCount = 0;
         this.mesh = this.jsonLoaderService.getModel(MINERAL_MODEL);
         this.mesh.geometry.name = 'mineral';
+        this.mesh.scale.set(0.1, 0.1, 0.1);
     }
 
     // Methods

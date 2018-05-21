@@ -1,4 +1,4 @@
-import { ObjectLoaderService } from './../jsonLoader.service';
+import { ObjectLoaderService } from './../objectLoader.service';
 import { Mineral } from 'app/minerals/mineral';
 import * as THREE from 'three';
 

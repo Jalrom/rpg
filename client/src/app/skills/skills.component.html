@@ -1,4 +1,28 @@
-<div>
-    <span *ngIf="miningSkill">Mining level : {{ miningSkill.level }}</span>
-    <span *ngIf="miningSkill">Mining experience : {{ miningSkill.experience }}  /  {{ (miningSkill.level * 5 ) * (miningSkill.level * 5)}}</span>
+<div *ngIf="!isOpenSkills" id="skillsButton"
+    (mousedown)="openSkills($event)"
+>
+</div>
+<div *ngIf="isOpenSkills" id="skillsView" (mousemove)="onMouseMove($event)">
+    <div id="closeSkills" (mousedown)="closeSkills($event)">
+    </div>
+    <div id="title">Skills</div>
+    <div id="skills">
+        <table>
+            <tr id="row" *ngFor="let row of skills; let i = index;">
+                <td id="skill" *ngFor="let skill of row; let j = index" (click)="openDetails(i,j)">
+                    {{ skill.name }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="detailView" *ngIf="currentSkill">
+        <div id="details">
+            <div class="detail" id="detailTitle">{{currentSkill.name}}</div>
+            <div class="detail">Level {{currentSkill.level}}</div>
+            <div class="detail" id="expBar">
+                <div id="exp" [ngStyle]="setStyles()"></div>
+            </div>
+            <div class="detail">Experience {{currentSkill.experience}} / {{currentSkill.calculateNextLevelExperience(currentSkill.level)}}</div>
+        </div>
+    </div>
 </div>

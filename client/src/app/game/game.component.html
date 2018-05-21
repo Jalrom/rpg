@@ -4,6 +4,7 @@
     (mousedown)="onMouseDown($event)"
     [ngStyle]="{'cursor': raycasterService.cursor == 'default' ? default : 'url(/assets/cursors/' + raycasterService.cursor + '), auto'}"
 >
+    <div *ngIf="" id="block"></div>
     <app-inventory></app-inventory>
     <app-skills></app-skills>
 </div>

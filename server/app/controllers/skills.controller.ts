@@ -36,19 +36,17 @@ export class SkillsController implements RegistrableController {
                 console.log(req.body);
                 
                 skill.player = await this.playerRepository.find(req.body.playerId);
-                skill.name = 'mining';
+                skill.name = 'Mining';
                 skill.level = 1;
                 skill.experience = 0;              
                 await this.skillsService.createSkill(skill).then(skills => res.json(skills)).catch(err => next(err));
             })
             .put(async(req: express.Request, res: express.Response, next: express.NextFunction) => {                
-                const skill = new Skill(
-                    req.body.name,
-                    req.body.level,
-                    req.body.experience,
-                    req.body.player,
-                    req.body.id
-                );
+                const skill = {
+                    level: req.body.level,
+                    experience: req.body.experience,
+                    id: req.body.id
+                };
 
                 const updatedSkill = await this.skillsService.updateSkill(skill).catch(err => next(err));
                 res.json(updatedSkill);
